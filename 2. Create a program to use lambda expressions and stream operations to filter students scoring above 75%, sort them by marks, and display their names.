@@ -1,0 +1,51 @@
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+class Student {
+    private String name;
+    private double marks;
+
+    public Student(String name, double marks) {
+        this.name = name;
+        this.marks = marks;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getMarks() {
+        return marks;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", marks=" + marks +
+                '}';
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Updated student names to NK, PK, VCM, AY, LD
+        List<Student> students = Arrays.asList(
+                new Student("NK", 85.5),
+                new Student("PK", 72.0),
+                new Student("VCM", 90.0),
+                new Student("AY", 68.0),
+                new Student("LD", 78.5)
+        );
+
+        List<String> filteredAndSortedStudents = students.stream()
+                .filter(student -> student.getMarks() > 75.0)  // Filter students with marks > 75%
+                .sorted((s1, s2) -> Double.compare(s2.getMarks(), s1.getMarks()))  // Sort by marks in descending order
+                .map(Student::getName)  // Extract student names
+                .collect(Collectors.toList());  // Collect names into a list
+
+        // Display the names of the filtered and sorted students
+        filteredAndSortedStudents.forEach(System.out::println);
+    }
+}
