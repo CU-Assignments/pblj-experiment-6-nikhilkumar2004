@@ -1,0 +1,38 @@
+import java.util.*;
+
+class Employee {
+    String name;
+    int age;
+    double salary;
+
+    public Employee(String name, int age, double salary) {
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return name + ", " + age + ", " + salary;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee("Aditya", 25, 50000));
+        employees.add(new Employee("Aakash ", 30, 70000));
+        employees.add(new Employee("Naman", 22, 45000));
+        employees.add(new Employee("Nikkhil", 35, 80000));
+
+        employees.sort(Comparator.comparing(emp -> emp.name));
+        System.out.println("Sorted by Name: " + employees);
+
+        employees.sort(Comparator.comparingInt(emp -> emp.age));
+        System.out.println("Sorted by Age: " + employees);
+
+       
+        employees.sort(Comparator.comparingDouble(emp -> emp.salary));
+        System.out.println("Sorted by Salary: " + employees);
+    }
+}
